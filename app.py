@@ -29,9 +29,8 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-    # latitude = db.Column(db.String(10), nullable=True)
-    # longitude = db.Column(db.String(10), nullable=True)
-
+    latitude = db.Column(db.String(10), nullable=True)
+    longitude = db.Column(db.String(10), nullable=True)
 
 
 class RegisterForm(FlaskForm):
@@ -113,12 +112,12 @@ def processCoordinates(sender):
     form = LoginForm()
     con = sql.connect('database.db')
     c =  con.cursor() 
-    c.execute("UPDATE user SET latitude=%s WHERE id=%s" %(geoInfo['Latitude'], form.username.data))
+    print(current_user.username)
+    c.execute("UPDATE user SET latitude ='%s', longitude = '%s' WHERE username = '%s' " %(geoInfo['Latitude'], geoInfo['Longitude'], current_user.username))
     # AND longitude=%s , geoInfo['Longitude']
     con.commit() 
-
-
     return 'info recieved'
+
 
 
 if __name__ == "__main__":
