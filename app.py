@@ -7,8 +7,11 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import json
 import sqlite3 as sql
+from math import radians, cos, sin, asin, sqrt
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -58,6 +61,50 @@ class LoginForm(FlaskForm):
                              InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
 
     submit = SubmitField('Login')
+
+def distance(lat1, lat2, lon1, lon2):
+     
+    # The math module contains a function named radians which converts from degrees to radians.
+    lon1 = radians(lon1)
+    lon2 = radians(lon2)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+      
+    # Haversine formula
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+ 
+    c = 2 * asin(sqrt(a))
+    
+    # Radius of earth in kilometers. Use 3956 for miles
+    r = 6371
+      
+    # calculate the result
+    return(c * r)
+
+def return_garage_data(coordinates):
+    con = sql.connect('database.db')
+    c =  con.cursor() 
+    c.execute("SELECT * FROM merchant")
+    records=c.fetchall()
+    min_distance= 13592
+    id_of_closest_merchant=0
+    # print(float(current_user.latitude), float(current_user.longitude))
+    for merchant in records:
+        # print(f"Latitude {merchant[1]}, Longitude{merchant[2]}")
+        user_merchant_distance = distance(float(current_user.latitude), merchant[1], float(current_user.longitude) ,  merchant[2])
+        # print(f"Merchant number {merchant[0]} distance: {user_merchant_distance}")
+        if user_merchant_distance<min_distance:
+            min_distance = user_merchant_distance
+            id_of_closest_merchant = merchant[0]
+
+    print(id_of_closest_merchant)
+
+    for merchant in records:
+        if(merchant[0]==id_of_closest_merchant):
+            return merchant;
+
 
 
 @app.route('/')
@@ -116,8 +163,12 @@ def processCoordinates(sender):
     c.execute("UPDATE user SET latitude ='%s', longitude = '%s' WHERE username = '%s' " %(geoInfo['Latitude'], geoInfo['Longitude'], current_user.username))
     # AND longitude=%s , geoInfo['Longitude']
     con.commit() 
-    return 'info recieved'
-
+    con.close()
+    
+    closest_garage = return_garage_data(geoInfo)
+    URL= "http://www.google.com/maps/place/" + str(closest_garage[1])+"," + str(closest_garage[2])
+    print(URL)
+    return redirect(URL)
 
 
 if __name__ == "__main__":
