@@ -11,8 +11,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
 
   let sender = {
     'Latitude':position.coords.latitude, 
@@ -26,4 +24,12 @@ function showPosition(position) {
 
   xhr.open('POST', URL);
   xhr.send(sender);
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      document.getElementById("a1").href = xhr.response;
+      document.getElementById("p1").innerHTML = "Your nearest garage";
+
+    }
+  }
 }

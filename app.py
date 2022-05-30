@@ -8,10 +8,8 @@ from flask_bcrypt import Bcrypt
 import json
 import sqlite3 as sql
 from math import radians, cos, sin, asin, sqrt
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -168,7 +166,7 @@ def processCoordinates(sender):
     closest_garage = return_garage_data(geoInfo)
     URL= "http://www.google.com/maps/place/" + str(closest_garage[1])+"," + str(closest_garage[2])
     print(URL)
-    return redirect(URL)
+    return URL
 
 
 if __name__ == "__main__":
