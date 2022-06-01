@@ -157,7 +157,7 @@ def processCoordinates(sender):
     form = LoginForm()
     con = sql.connect('database.db')
     c =  con.cursor() 
-    print(current_user.username)
+    # print(current_user.username)
     c.execute("UPDATE user SET latitude ='%s', longitude = '%s' WHERE username = '%s' " %(geoInfo['Latitude'], geoInfo['Longitude'], current_user.username))
     # AND longitude=%s , geoInfo['Longitude']
     con.commit() 

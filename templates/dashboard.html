@@ -7,19 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="{{url_for('static' , filename='script.js')}}" defer></script>
+    <link rel="stylesheet" href="../static/dashboard.css">
 </head>
 
 <body>
-    <h1>Hello you are logged in.</h1>
 
+    <div class="bgimg">
+        <div class="middle">
+    <h1>Hello you are logged in.</h1>
         
     <p>Click the button to get your nearest garage.</p>
-
-    <button onclick="getLocation()">Try It</button>
+   
+    <button class="button" onclick="getLocation()">Try It</button> 
+ 
+    
     <a href="" id="a1"><p id="p1"></p></a>
     <p id="demo"></p>
 
     <a href="{{url_for('logout')}}">Press here to logout</a>
+</div>
+</div>
+</div>
 </body>
 
 </html>
