@@ -38,3 +38,35 @@ body, html {
     font-family:  Courier;
     font-weight: 600;
   }
+
+  #search{
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #search:hover, #search:active {
+    background-color: green;
+    color: white;
+  }
+
+  a:link, a:visited {
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: green;
+    color: white;
+  }

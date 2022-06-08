@@ -41,3 +41,13 @@
   .link2{
       margin-top: 25px;
   }
+
+  .flex-container{
+    display: flex;
+    align-items: center;
+  }
+
+  h1{
+    margin: auto;
+
+  }
