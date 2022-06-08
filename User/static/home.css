@@ -1,0 +1,53 @@
+.bgimg {
+
+    background-image: url('car 2.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    font-family:  Courier ;
+    font-size: 20px;
+  
+  }
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .middle {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+  }
+
+  a:link, a:visited {
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: green;
+    color: white;
+  }
+
+  .link2{
+      margin-top: 25px;
+  }
+
+  .flex-container{
+    display: flex;
+    align-items: center;
+  }
+
+  h1{
+    margin: auto;
+
+  }

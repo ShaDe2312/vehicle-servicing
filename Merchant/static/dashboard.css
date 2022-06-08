@@ -1,0 +1,72 @@
+.bgimg {
+
+  background-image: url('car.jpg');
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-family:  Courier ;
+  font-size: 20px;
+
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .middle {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+  }
+
+  .button {
+    background-color: #ffffff;
+    border: none;
+    color: #000000;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family:  Courier;
+    font-weight: 600;
+  }
+
+  #search{
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #search:hover, #search:active {
+    background-color: green;
+    color: white;
+  }
+
+  a:link, a:visited {
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: green;
+    color: white;
+  }

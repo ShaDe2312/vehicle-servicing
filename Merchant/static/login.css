@@ -1,0 +1,96 @@
+.bgimg {
+
+    background-image: url('car 4.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    font-family:  Courier ;
+    font-size: 20px;
+  
+  }
+
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .middle {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .button {
+    background-color:none;
+    border: none;
+    color: #ffffff;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family:  Courier;
+    font-weight: 600;
+  }
+  #a{
+      color:#ffffff;
+  }
+
+
+  
+  #username{
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  #username:focus{
+    border-bottom: 2px solid greenyellow;
+  }
+
+  #password{
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+
+  #password:focus{
+    border-bottom: 2px solid greenyellow;
+  }
+
+  #submit{
+    background-color: #30292B;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #submit:hover, #submit:active {
+    background-color: green;
+    color: white;
+  }
