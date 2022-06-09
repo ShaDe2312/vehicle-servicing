@@ -166,8 +166,21 @@ def processCoordinates(sender):
     
     closest_garage = return_garage_data(geoInfo)
     URL= "http://www.google.com/maps/place/" + str(closest_garage[1])+"," + str(closest_garage[2])
-    print(URL)
-    return URL
+
+    con = sql.connect('../Merchant/database.db')
+    c =  con.cursor() 
+    c.execute("SELECT name,address,phone_number,can_send_person FROM user where id = '%s'" %(closest_garage[0])) 
+    # closest_garage[0] is the id of the garage
+    records=c.fetchall()
+    # print(records);
+    myDict={}
+    myDict['Name'] = records[0][0];
+    myDict['Address'] = records[0][1];
+    myDict['Phone'] = records[0][2];
+    myDict['Person'] = records[0][3];
+    myDict['URL']=URL;
+    print(myDict)
+    return json.dumps(myDict);
 
 
 if __name__ == "__main__":

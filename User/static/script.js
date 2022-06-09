@@ -27,8 +27,21 @@ function showPosition(position) {
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
-      document.getElementById("a1").href = xhr.response;
+      emptyDiv = document.getElementById('empty');
+      garageInfo= JSON.parse(xhr.response)
+      console.log(garageInfo)
+      document.getElementById("a1").href = garageInfo["URL"];
       document.getElementById("p1").innerHTML = "Your nearest garage";
+      data = 'Contact Details are: <br> ' + garageInfo["Name"] + '<br>' + garageInfo['Address']+ '<br>' + garageInfo["Phone"] + '<br>'
+
+      if(garageInfo["Person"]=="Yes"){
+        data += "Vehicle Pickup: Available";
+      }
+      else{
+        data += "Vehicle Pickup: Not Available";
+      }
+
+      emptyDiv.innerHTML= data; 
 
     }
   }
