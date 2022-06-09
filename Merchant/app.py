@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -110,7 +110,34 @@ def register():
 
     return render_template('register.html', form=form)
 
-@app.route('/get-coordinates/<string:sender>', methods=['POST'])
+@app.route('/merchant-info', methods=['GET', 'POST'])
+@login_required
+def getinfo():
+    return render_template('infoform.html')
+
+@app.route('/record-info', methods=['GET', 'POST'])
+@login_required  
+def recordinfo():
+    if request.method == 'POST':
+        name = request.form.get("personname")
+        address = request.form.get("address")
+        phonenumber = request.form.get("phonenumber")
+        pickup = request.form.get("pickup")
+
+        if pickup=="on":
+            pickup = "Yes"
+        else:
+            pickup = "No"        
+        print(name,address,phonenumber,pickup)
+        con = sql.connect('database.db')
+        c =  con.cursor() 
+        c.execute("UPDATE user SET name ='%s', phone_number = '%s', address='%s', can_send_person='%s' WHERE username = '%s' " %(name, phonenumber,address,pickup, current_user.username))
+        con.commit() 
+        con.close()
+    return redirect('dashboard')
+
+#
+@app.route('/get-coordinates/<string:sender>', methods=['GET','POST'])
 def processCoordinates(sender):
     geoInfo= json.loads(sender)
     print(f"Latitude {geoInfo['Latitude']}")
@@ -121,12 +148,10 @@ def processCoordinates(sender):
     c =  con.cursor() 
     # print(current_user.username)
     c.execute("UPDATE user SET latitude ='%s', longitude = '%s' WHERE username = '%s' " %(geoInfo['Latitude'], geoInfo['Longitude'], current_user.username))
-    # AND longitude=%s , geoInfo['Longitude']
     con.commit() 
     con.close()
-
-    return redirect(url_for('dashboard'))
-
-
+    # redirect(url_for('getinfo'))
+    # return render_template('infoform.html')
+    return '0'
 if __name__ == "__main__":
     app.run(debug=True)

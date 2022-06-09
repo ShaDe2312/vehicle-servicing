@@ -27,9 +27,16 @@ function showPosition(position) {
 
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
-      document.getElementById("a1").href = xhr.response;
-      document.getElementById("p1").innerHTML = "Your nearest garage";
-
+                var emptyDiv = document.getElementById("emptyDiv")
+                var a = document.createElement('a'); 
+                var link = document.createTextNode("Fill the rest of your profile");
+                a.appendChild(link); 
+                a.title = "Enter information"; 
+                a.href = "http://127.0.0.1:5000/merchant-info"; 
+                emptyDiv.innerHTML = "Your location was recorded successfully!<br><br>";
+                emptyDiv.appendChild(a);
+               
+      // window.location.replace("");
     }
   }
 }
